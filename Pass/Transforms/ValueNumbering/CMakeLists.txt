@@ -9,7 +9,7 @@ include_directories(${LLVM_INCLUDE_DIRS})
 
 add_library(LLVMValueNumberingPass MODULE ValueNumbering.cpp)
 set_target_properties(LLVMValueNumberingPass PROPERTIES COMPILE_FLAGS "-D__GLIBCXX_USE_CXX11_ABI=0 ")
-SET(CMAKE_MODULE_LINKER_FLAGS "-undefined dynamic_lookup")
+#SET(CMAKE_MODULE_LINKER_FLAGS "-undefined dynamic_lookup")
 
 target_link_libraries(LLVMValueNumberingPass)
 

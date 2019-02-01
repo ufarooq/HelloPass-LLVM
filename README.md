@@ -23,11 +23,11 @@ cmake -DCMAKE_BUILD_TYPE=Release ../Transforms/ValueNumbering
 ```bash
 make -j4
 ```
-5. Move to **test**/ directory and generate ***Test.ll*** file for Test.c using following  command. 
+5. Move to **test**/ directory and generate ***Test.ll*** file for Test.c using following command. 
 ```c++
 clang -Xclang -disable-O0-optnone Test.c -O0 -S -emit-llvm -o Test.ll
 ```
-6. Next generate ***Test.bc*** file for Test.ll using following  command. 
+6. Next generate ***Test.bc*** file for Test.ll using following command. 
 ```c++
 opt Test.ll -mem2reg -S -o Test.bc
 ```
@@ -96,18 +96,7 @@ if (inst.isBinaryOp())
     // See Other classes Instruction::Sub, Instruction::UDiv, Instruction::SDiv
 }
 ```
-8. Also, you can compare and find if it is a Load/store instruction. 
-```c++
-if(inst.getOpcode() == Instruction::Load)
-{
-	errs() << "This is Load"<<"\n";
-}
-if(inst.getOpcode() == Instruction::Store)
-{
-	errs() << "This is Store"<<"\n";
-}
-```
-9. Implementation of ``runOnFunction(Function &F)`` looks as following in whole.  
+8. Implementation of ``runOnFunction(Function &F)`` looks as following in whole.  
 ```c++
 string func_name = "test";
 bool runOnFunction(Function &F) override {

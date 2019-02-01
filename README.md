@@ -88,7 +88,7 @@ if (inst.isBinaryOp())
     // See Other classes Instruction::Sub, Instruction::UDiv, Instruction::SDiv
 }
 ```
-9. Implementation of ``runOnFunction(Function &F)`` looks as following in whole.  
+8. Implementation of ``runOnFunction(Function &F)`` looks as following in whole.  
 ```c++
 string func_name = "test";
 bool runOnFunction(Function &F) override {

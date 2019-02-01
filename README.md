@@ -81,9 +81,10 @@ if (inst.isBinaryOp())
 	{
 		errs() << "This is Addition"<<"\n";
 	}
-    if(inst.getOpcode() == Instruction::Mul){
-        errs() << "This is Multiplication"<<"\n";
-    }
+	if(inst.getOpcode() == Instruction::Mul)
+	{
+		errs() << "This is Multiplication"<<"\n";
+	}
     // See Other classes Instruction::Sub, Instruction::UDiv, Instruction::SDiv
 }
 ```

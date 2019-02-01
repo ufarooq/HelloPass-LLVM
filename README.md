@@ -64,7 +64,14 @@ for (auto it = ptr->op_begin(); it != ptr->op_end(); ++it)
 ...
 }
 ```
-6. Implementation of ``runOnFunction(Function &F)`` looks as following in whole.  
+6. Use Following API to check whether instruction is a binary operation
+```c++
+if (inst.isBinaryOp())
+{
+	...
+}
+```
+7. Implementation of ``runOnFunction(Function &F)`` looks as following in whole.  
 ```c++
 string func_name = "test";
 bool runOnFunction(Function &F) override {

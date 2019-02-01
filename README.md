@@ -56,7 +56,7 @@ bool runOnFunction(Function &F) override {
 	}
 }
 ```
-5. Once we get an instruction, then we can cast it ``User`` and iterate over operands of that instruction. 
+5. Once we get an instruction, then we can cast it as ``User`` and iterate over operands of that instruction. 
 ```c++
 auto* ptr = dyn_cast<User>(&inst);
 for (auto it = ptr->op_begin(); it != ptr->op_end(); ++it) 
@@ -88,7 +88,18 @@ if (inst.isBinaryOp())
     // See Other classes Instruction::Sub, Instruction::UDiv, Instruction::SDiv
 }
 ```
-8. Implementation of ``runOnFunction(Function &F)`` looks as following in whole.  
+8. Also, you can compare and find if it is a Load/store instruction. 
+```c++
+if(inst.getOpcode() == Instruction::Load)
+{
+	errs() << "This is Load"<<"\n";
+}
+if(inst.getOpcode() == Instruction::Store)
+{
+	errs() << "This is Store"<<"\n";
+}
+```
+9. Implementation of ``runOnFunction(Function &F)`` looks as following in whole.  
 ```c++
 string func_name = "test";
 bool runOnFunction(Function &F) override {

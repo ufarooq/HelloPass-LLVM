@@ -2,7 +2,7 @@
 Getting started for LLVM pass writing
 
 ## Setup 
-1. Clone this repo, see the file details:
+1. Clone this repo, see the file details below:
 - [Pass](https://github.com/ufarooq/HelloPass-LLVM/tree/master/Pass "Pass") - root directory for build and source code
    - [Transforms](https://github.com/ufarooq/HelloPass-LLVM/tree/master/Pass/Transforms "Transforms") is top level directory for project.
    - [CMakeLists.txt](https://github.com/ufarooq/HelloPass-LLVM/blob/master/Pass/Transforms/CMakeLists.txt "CMakeLists.txt")  file is CMakeLists for the Project.
@@ -44,7 +44,7 @@ bool runOnFunction(Function &F) override {
 	}
 }
 ```
-4. Next, we can iterate over the instructions in a basic block (BB). Note: instructions are LLVM IR.
+4. Next, we can iterate over the instructions in a basic block (BB). **Note:** instructions are in LLVM IR.
 ```c++
 bool runOnFunction(Function &F) override {
 	for (auto& basic_block : F)
@@ -56,7 +56,7 @@ bool runOnFunction(Function &F) override {
 	}
 }
 ```
-5. Once we get an instruction, we can cast it ``User`` and iterate over operands of that instruction. 
+5. Once we get an instruction, then we can cast it ``User`` and iterate over operands of that instruction. 
 ```c++
 auto* ptr = dyn_cast<User>(&inst);
 for (auto it = ptr->op_begin(); it != ptr->op_end(); ++it) 
@@ -64,14 +64,30 @@ for (auto it = ptr->op_begin(); it != ptr->op_end(); ++it)
 ...
 }
 ```
-6. Use Following API to check whether instruction is a binary operation
+6. Use Following API to check whether instruction is a binary operation (Assignment)
 ```c++
 if (inst.isBinaryOp())
 {
 	...
 }
 ```
-7. Implementation of ``runOnFunction(Function &F)`` looks as following in whole.  
+7. Use Following APIs to compare and find operator types
+```c++
+
+if (inst.isBinaryOp())
+{
+	inst.getOpcodeName(); //prints OpCode by name such as add, mul etc.
+	if(inst.getOpcode() == Instruction::Add)
+	{
+		errs() << "This is Addition"<<"\n";
+	}
+    if(inst.getOpcode() == Instruction::Mul){
+        errs() << "This is Multiplication"<<"\n";
+    }
+    // See Other classes Instruction::Sub, Instruction::UDiv, Instruction::SDiv
+}
+```
+9. Implementation of ``runOnFunction(Function &F)`` looks as following in whole.  
 ```c++
 string func_name = "test";
 bool runOnFunction(Function &F) override {

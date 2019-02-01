@@ -31,8 +31,19 @@ struct ValueNumbering : public FunctionPass {
             for (auto& inst : basic_block)
             {
             	errs() << inst << "\n";
-                //if (inst.isBinaryOp())
-                //{
+                if (inst.isBinaryOp())
+                {
+                    errs() << "Op Code:" << inst.getOpcodeName()<<"\n"; // print opcode name
+                    if(inst.getOpcode() == Instruction::Add){
+                      errs() << "This is Addition"<<"\n";
+                    }
+                    if(inst.getOpcode() == Instruction::Add){
+                      errs() << "This is Addition"<<"\n";
+                    }
+                    if(inst.getOpcode() == Instruction::Mul){
+                      errs() << "This is Multiplication"<<"\n";
+                    }
+                    // See Other classes, Instruction::Sub, Instruction::UDiv, Instruction::SDiv
                 //	errs() << "Operand(0)" << (*inst.getOperand(0))<<"\n";
                     auto* ptr = dyn_cast<User>(&inst);
 					//errs() << "\t" << *ptr << "\n";
@@ -40,7 +51,7 @@ struct ValueNumbering : public FunctionPass {
                         errs() << "\t" <<  *(*it) << "\n";
                         //if ((*it)->hasName()) errs() << (*it)->getName() << "\n";                      
                     }
-               // }
+                }
             }
         }
     return false;

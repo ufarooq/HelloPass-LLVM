@@ -25,15 +25,11 @@ make -j4
 ```
 5. Move to **test**/ directory and generate ***test.ll*** file for test.c using following command. 
 ```c++
-clang -Xclang -disable-O0-optnone test.c -O0 -S -emit-llvm -o test.ll
+clang -S -emit-llvm test.c -o test.ll
 ```
-6. Next generate ***Test.bc*** file for test.ll using following command. 
-```c++
-opt test.ll -mem2reg -S -o test_opt.ll
-```
-7. After generating test_opt.ll, execute following command it execute the LLVM Pass. 
+6. After generating test.ll, execute following command it execute the LLVM Pass. 
 ```bash
-opt -load ../Pass/build/libLLVMValueNumberingPass.so  -ValueNumbering < test_opt.ll > /dev/null
+opt -load ../Pass/build/libLLVMValueNumberingPass.so  -ValueNumbering test.ll
 ```
 ## Code Explanation 
 1. The implemented Pass extends from ``FunctionPass`` class and overrides ``runOnFunction(Function &F)`` function.

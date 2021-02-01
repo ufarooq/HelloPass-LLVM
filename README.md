@@ -27,7 +27,7 @@ make -j4
 ```c++
 clang -S -emit-llvm test.c -o test.ll
 ```
-6. After generating test.ll, execute following command it execute the LLVM Pass. 
+6. After generating test.ll, run the following command to test the LLVM Pass. 
 ```bash
 opt -load ../Pass/build/libLLVMValueNumberingPass.so  -ValueNumbering test.ll
 ```

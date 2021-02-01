@@ -33,7 +33,7 @@ opt -load ../Pass/build/libLLVMValueNumberingPass.so  -ValueNumbering test.ll
 ```
 ## Code Explanation 
 1. The implemented Pass extends from ``FunctionPass`` class and overrides ``runOnFunction(Function &F)`` function.
-2. ``runOnFunction(Function &F)`` function gets called the number of times as many number of functions are present in test code. Name of the function is available using following code snippet. 
+2. ``runOnFunction(Function &F)`` function gets called for each function in the test code. Name of the function is accessible using following code snippet. 
 ```c++
 bool runOnFunction(Function &F) override {
 	F.getName();

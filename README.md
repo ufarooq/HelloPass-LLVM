@@ -83,7 +83,7 @@ for (auto& inst : basic_block)
     ...
 }
 ```
-- Use Following API to check whether instruction is a binary operation (Assignment)
+- You can check whether instruction is a binary operation (like ``a = b + c``) with ``isBinaryOp()``
 ```c++
 if (inst.isBinaryOp())
 {

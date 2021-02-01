@@ -16,53 +16,53 @@ using namespace llvm;
 
 namespace {
 struct ValueNumbering : public FunctionPass {
-  string func_name = "test";
-  static char ID;
-  ValueNumbering() : FunctionPass(ID) {}
+    string func_name = "test";
+    static char ID;
+    ValueNumbering() : FunctionPass(ID) {}
 
-  bool runOnFunction(Function &F) override {
-    errs() << "ValueNumbering: ";
-    errs() << F.getName() << "\n";
+    bool runOnFunction(Function &F) override {
+	    
+        errs() << "ValueNumbering: " << F.getName() << "\n";
         if (F.getName() != func_name) return false;
 
         for (auto& basic_block : F)
         {
-
             for (auto& inst : basic_block)
             {
-            	errs() << inst << "\n";
-              if(inst.getOpcode() == Instruction::Load){
-                      errs() << "This is Load"<<"\n";
-              }
-              if(inst.getOpcode() == Instruction::Store){
-                      errs() << "This is Store"<<"\n";
-              }
+                errs() << inst << "\n";
+                if(inst.getOpcode() == Instruction::Load){
+                    errs() << "This is Load"<<"\n";
+                }
+                if(inst.getOpcode() == Instruction::Store){
+                    errs() << "This is Store"<<"\n";
+                }
                 if (inst.isBinaryOp())
                 {
-                    errs() << "Op Code:" << inst.getOpcodeName()<<"\n"; // print opcode name
+                    errs() << "Op Code:" << inst.getOpcodeName()<<"\n";
                     if(inst.getOpcode() == Instruction::Add){
-                      errs() << "This is Addition"<<"\n";
+                        errs() << "This is Addition"<<"\n";
                     }
                     if(inst.getOpcode() == Instruction::Add){
-                      errs() << "This is Addition"<<"\n";
+                        errs() << "This is Addition"<<"\n";
                     }
                     if(inst.getOpcode() == Instruction::Mul){
-                      errs() << "This is Multiplication"<<"\n";
+                        errs() << "This is Multiplication"<<"\n";
                     }
                     
-                    // See Other classes, Instruction::Sub, Instruction::UDiv, Instruction::SDiv
-                //	errs() << "Operand(0)" << (*inst.getOperand(0))<<"\n";
+                    // see other classes, Instruction::Sub, Instruction::UDiv, Instruction::SDiv
+                    // errs() << "Operand(0)" << (*inst.getOperand(0))<<"\n";
                     auto* ptr = dyn_cast<User>(&inst);
-					//errs() << "\t" << *ptr << "\n";
+		    //errs() << "\t" << *ptr << "\n";
                     for (auto it = ptr->op_begin(); it != ptr->op_end(); ++it) {
                         errs() << "\t" <<  *(*it) << "\n";
-                        //if ((*it)->hasName()) errs() << (*it)->getName() << "\n";                      
+                        // if ((*it)->hasName()) 
+			    // errs() << (*it)->getName() << "\n";                      
                     }
-                }
-            }
-        }
-    return false;
-  }
+                } // end if
+            } // end for inst
+        } // end for block
+        return false;
+    } // end runOnFunction
 }; // end of struct ValueNumbering
 }  // end of anonymous namespace
 

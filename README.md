@@ -1,7 +1,7 @@
 # HelloPass-LLVM
 Getting started for LLVM pass writing
 
-## Setup 
+## Setup and Run
 1. Clone this repo, see the file details below:
 - [Pass](https://github.com/ufarooq/HelloPass-LLVM/tree/master/Pass "Pass") - root directory for build and source code
    - [Transforms](https://github.com/ufarooq/HelloPass-LLVM/tree/master/Pass/Transforms "Transforms") is top level directory for project.

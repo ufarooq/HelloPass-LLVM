@@ -51,13 +51,13 @@ bool runOnFunction(Function &F) override {
 4. Next, we can iterate over the instructions in a basic block (BB). **Note:** instructions are in LLVM IR.
 ```c++
 bool runOnFunction(Function &F) override {
-	for (auto& basic_block : F)
-	{
-		for (auto& inst : basic_block)
-		{
-			...
-		}
-	}
+    for (auto& basic_block : F)
+    {
+        for (auto& inst : basic_block)
+        {
+            ...
+        }
+    }
 }
 ```
 5. Once we get an instruction, then we can cast it as ``User`` and iterate over operands of that instruction. 
@@ -65,14 +65,23 @@ bool runOnFunction(Function &F) override {
 auto* ptr = dyn_cast<User>(&inst);
 for (auto it = ptr->op_begin(); it != ptr->op_end(); ++it) 
 {
-...
+    ...
+}
+```
+You can also access the operands using ``getOperand(operand_index)`` as in:
+```c++
+for (auto& inst : basic_block)
+{
+    ...
+    errs() << "operand: " << inst.getOperand(0) << "\n";
+    ...
 }
 ```
 6. Use Following API to check whether instruction is a binary operation (Assignment)
 ```c++
 if (inst.isBinaryOp())
 {
-	...
+    ...
 }
 ```
 7. Use Following APIs to compare and find operator types

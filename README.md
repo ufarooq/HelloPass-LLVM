@@ -39,8 +39,13 @@ bool runOnFunction(Function &F) override {
 	F.getName();
 }
 ```
-
-3. We can iterate over basic blocks of the given function as:
+- To print out to the screen, you need to redirect strings to ``errs()``, as in:
+```c++
+bool runOnFunction(Function &F) override {
+	errs() << "function name: " << F.getName() << "\n";
+}
+```
+- We can iterate over basic blocks of the given function as:
 ```c++
 bool runOnFunction(Function &F) override {
 	for (auto& basic_block : F)
@@ -49,7 +54,7 @@ bool runOnFunction(Function &F) override {
 	}
 }
 ```
-4. Next, we can iterate over the instructions in a basic block (BB). **Note:** instructions are in LLVM IR.
+- Next, we can iterate over the instructions in a basic block (BB). **Note:** instructions are in LLVM IR.
 ```c++
 bool runOnFunction(Function &F) override {
     for (auto& basic_block : F)
@@ -61,7 +66,7 @@ bool runOnFunction(Function &F) override {
     }
 }
 ```
-5. Once we get an instruction, then we can cast it as ``User`` and iterate over operands of that instruction. 
+- Once we get an instruction, then we can cast it as ``User`` and iterate over operands of that instruction. 
 ```c++
 auto* ptr = dyn_cast<User>(&inst);
 for (auto it = ptr->op_begin(); it != ptr->op_end(); ++it) 
@@ -69,7 +74,7 @@ for (auto it = ptr->op_begin(); it != ptr->op_end(); ++it)
     ...
 }
 ```
-You can also access the operands using ``getOperand(operand_index)`` as in:
+- You can also access the operands using ``getOperand(operand_index)`` as in:
 ```c++
 for (auto& inst : basic_block)
 {
@@ -78,14 +83,14 @@ for (auto& inst : basic_block)
     ...
 }
 ```
-6. Use Following API to check whether instruction is a binary operation (Assignment)
+- Use Following API to check whether instruction is a binary operation (Assignment)
 ```c++
 if (inst.isBinaryOp())
 {
     ...
 }
 ```
-7. Use Following APIs to compare and find operator types
+- Use Following APIs to compare and find operator types
 ```c++
 
 if (inst.isBinaryOp())
@@ -102,7 +107,7 @@ if (inst.isBinaryOp())
     // See Other classes Instruction::Sub, Instruction::UDiv, Instruction::SDiv
 }
 ```
-8. Implementation of ``runOnFunction(Function &F)`` looks as following in whole.  
+- Implementation of ``runOnFunction(Function &F)`` looks as following in whole.  
 ```c++
 string func_name = "test";
 bool runOnFunction(Function &F) override {
